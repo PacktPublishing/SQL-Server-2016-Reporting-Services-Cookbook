@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>/Data Sources/WideWorldImportersDW</DataSourceReference>
+      <CommandText>SELECT 
+      (SELECT SUM([Total Excluding Tax]) 
+	     FROM [Fact].[Sale]
+	    WHERE [Invoice Date Key] 
+		  BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, '19000101', GETDATE()), '19000101') 
+		      AND GETDATE()
+      ) AS CurrentYTD 
+    , ( SELECT SUM([Total Excluding Tax]) 
+	     FROM [Fact].[Sale]
+	    WHERE [Invoice Date Key] 
+		  BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, '19000101', GETDATE()) - 1 , '19000101') 
+		      AND DATEADD(year, -1, GETDATE())
+      ) AS PreviousYTD</CommandText>
+      <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+    </Query>
+    <Fields>
+      <Field Name="CurrentYTD">
+        <DataField>CurrentYTD</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PreviousYTD">
+        <DataField>PreviousYTD</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+  <rd:ReportServerUrl>http://localhost/reportserver</rd:ReportServerUrl>
+</SharedDataSet>

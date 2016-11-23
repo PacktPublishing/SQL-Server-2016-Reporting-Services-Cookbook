@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>DataSourceAWInternetSalesTabularModel2014</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>3a1d61b7-3697-4b0a-a2fd-91a90fd587ad</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="DataSourceAWInternetSalesTabularModel2014">
+      <DataSourceReference>DataSourceAWInternetSalesTabularModel2014</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>87dc679b-06c6-46f6-8fe6-3b6c42ce2746</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSetInternetSales">
+      <Query>
+        <DataSourceName>DataSourceAWInternetSalesTabularModel2014</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="ProductCategoryProductCategoryName">
+            <Value>=Parameters!ProductCategoryProductCategoryName.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText> SELECT NON EMPTY { [Measures].[Internet Total Sales], [Measures].[Internet Total Tax Amt] } ON COLUMNS, NON EMPTY { ([Date].[Calendar Year].[Calendar Year].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( STRTOSET(@ProductCategoryProductCategoryName, CONSTRAINED) ) ON COLUMNS FROM [Internet Sales]) WHERE ( IIF( STRTOSET(@ProductCategoryProductCategoryName, CONSTRAINED).Count = 1, STRTOSET(@ProductCategoryProductCategoryName, CONSTRAINED), [Product Category].[Product Category Name].currentmember ) ) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS</CommandText>
+        <rd:DesignerState>&lt;QueryDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition"&gt;&lt;CommandType&gt;MDX&lt;/CommandType&gt;&lt;QuerySpecification xsi:type="MDXQuerySpecification"&gt;&lt;Select&gt;&lt;Items&gt;&lt;Item&gt;&lt;ID xsi:type="Level"&gt;&lt;DimensionName&gt;Date&lt;/DimensionName&gt;&lt;HierarchyName&gt;Calendar Year&lt;/HierarchyName&gt;&lt;HierarchyUniqueName&gt;[Date].[Calendar Year]&lt;/HierarchyUniqueName&gt;&lt;LevelName&gt;Calendar Year&lt;/LevelName&gt;&lt;UniqueName&gt;[Date].[Calendar Year].[Calendar Year]&lt;/UniqueName&gt;&lt;/ID&gt;&lt;ItemCaption&gt;Calendar Year&lt;/ItemCaption&gt;&lt;UniqueName&gt;true&lt;/UniqueName&gt;&lt;/Item&gt;&lt;Item&gt;&lt;ID xsi:type="Measure"&gt;&lt;MeasureName&gt;Internet Total Sales&lt;/MeasureName&gt;&lt;UniqueName&gt;[Measures].[Internet Total Sales]&lt;/UniqueName&gt;&lt;/ID&gt;&lt;ItemCaption&gt;Internet Total Sales&lt;/ItemCaption&gt;&lt;BackColor&gt;true&lt;/BackColor&gt;&lt;ForeColor&gt;true&lt;/ForeColor&gt;&lt;FontFamily&gt;true&lt;/FontFamily&gt;&lt;FontSize&gt;true&lt;/FontSize&gt;&lt;FontWeight&gt;true&lt;/FontWeight&gt;&lt;FontStyle&gt;true&lt;/FontStyle&gt;&lt;FontDecoration&gt;true&lt;/FontDecoration&gt;&lt;FormattedValue&gt;true&lt;/FormattedValue&gt;&lt;FormatString&gt;true&lt;/FormatString&gt;&lt;/Item&gt;&lt;Item&gt;&lt;ID xsi:type="Measure"&gt;&lt;MeasureName&gt;Internet Total Tax Amt&lt;/MeasureName&gt;&lt;UniqueName&gt;[Measures].[Internet Total Tax Amt]&lt;/UniqueName&gt;&lt;/ID&gt;&lt;ItemCaption&gt;Internet Total Tax Amt&lt;/ItemCaption&gt;&lt;BackColor&gt;true&lt;/BackColor&gt;&lt;ForeColor&gt;true&lt;/ForeColor&gt;&lt;FontFamily&gt;true&lt;/FontFamily&gt;&lt;FontSize&gt;true&lt;/FontSize&gt;&lt;FontWeight&gt;true&lt;/FontWeight&gt;&lt;FontStyle&gt;true&lt;/FontStyle&gt;&lt;FontDecoration&gt;true&lt;/FontDecoration&gt;&lt;FormattedValue&gt;true&lt;/FormattedValue&gt;&lt;FormatString&gt;true&lt;/FormatString&gt;&lt;/Item&gt;&lt;/Items&gt;&lt;/Select&gt;&lt;From&gt;Internet Sales&lt;/From&gt;&lt;Filter&gt;&lt;FilterItems&gt;&lt;FilterItem&gt;&lt;HierarchyUniqueName&gt;[Product Category].[Product Category Name]&lt;/HierarchyUniqueName&gt;&lt;Condition xsi:type="EqualTo"&gt;&lt;Members&gt;&lt;Member&gt;&lt;MemberUniqueName&gt;[Product Category].[Product Category Name].&amp;amp;[Accessories]&lt;/MemberUniqueName&gt;&lt;/Member&gt;&lt;/Members&gt;&lt;Parametrized&gt;true&lt;/Parametrized&gt;&lt;/Condition&gt;&lt;/FilterItem&gt;&lt;/FilterItems&gt;&lt;/Filter&gt;&lt;Calculations /&gt;&lt;Aggregates /&gt;&lt;QueryProperties /&gt;&lt;/QuerySpecification&gt;&lt;Query&gt;&lt;Statement&gt; SELECT NON EMPTY { [Measures].[Internet Total Sales], [Measures].[Internet Total Tax Amt] } ON COLUMNS, NON EMPTY { ([Date].[Calendar Year].[Calendar Year].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( STRTOSET(@ProductCategoryProductCategoryName, CONSTRAINED) ) ON COLUMNS FROM [Internet Sales]) WHERE ( IIF( STRTOSET(@ProductCategoryProductCategoryName, CONSTRAINED).Count = 1, STRTOSET(@ProductCategoryProductCategoryName, CONSTRAINED), [Product Category].[Product Category Name].currentmember ) ) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS&lt;/Statement&gt;&lt;ParameterDefinitions&gt;&lt;ParameterDefinition&gt;&lt;Name&gt;ProductCategoryProductCategoryName&lt;/Name&gt;&lt;DefaultValues&gt;&lt;DefaultValue&gt;[Product Category].[Product Category Name].&amp;amp;[Accessories]&lt;/DefaultValue&gt;&lt;/DefaultValues&gt;&lt;Caption&gt;Product Category Name&lt;/Caption&gt;&lt;HierarchyUniqueName&gt;[Product Category].[Product Category Name]&lt;/HierarchyUniqueName&gt;&lt;ParameterValuesQuery&gt;&lt;Statement&gt;WITH MEMBER [Measures].[ParameterCaption] AS [Product Category].[Product Category Name].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [Product Category].[Product Category Name].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [Product Category].[Product Category Name].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [Product Category].[Product Category Name].ALLMEMBERS ON ROWS FROM [Internet Sales]&lt;/Statement&gt;&lt;ParameterizedStatement&gt;&lt;ReferencedParameters /&gt;&lt;/ParameterizedStatement&gt;&lt;/ParameterValuesQuery&gt;&lt;MultipleValues&gt;true&lt;/MultipleValues&gt;&lt;/ParameterDefinition&gt;&lt;/ParameterDefinitions&gt;&lt;/Query&gt;&lt;/QueryDefinition&gt;</rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Calendar_Year">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Date].[Calendar Year].[Calendar Year]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Internet_Total_Sales">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[Internet Total Sales]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Internet_Total_Tax_Amt">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[Internet Total Tax Amt]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ProductCategoryProductCategoryName">
+      <Query>
+        <DataSourceName>DataSourceAWInternetSalesTabularModel2014</DataSourceName>
+        <CommandText>WITH MEMBER [Measures].[ParameterCaption] AS [Product Category].[Product Category Name].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [Product Category].[Product Category Name].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [Product Category].[Product Category Name].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [Product Category].[Product Category Name].ALLMEMBERS ON ROWS FROM [Internet Sales]</CommandText>
+        <rd:DesignerState>&lt;QueryDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition"&gt;&lt;CommandType&gt;MDX&lt;/CommandType&gt;&lt;Type&gt;Query&lt;/Type&gt;&lt;QuerySpecification xsi:type="MDXQuerySpecification"&gt;&lt;Select&gt;&lt;Items&gt;&lt;Item&gt;&lt;ID xsi:type="Measure"&gt;&lt;MeasureName&gt;ParameterCaption&lt;/MeasureName&gt;&lt;UniqueName&gt;[Measures].[ParameterCaption]&lt;/UniqueName&gt;&lt;/ID&gt;&lt;ItemCaption&gt;ParameterCaption&lt;/ItemCaption&gt;&lt;FormattedValue&gt;true&lt;/FormattedValue&gt;&lt;/Item&gt;&lt;Item&gt;&lt;ID xsi:type="Measure"&gt;&lt;MeasureName&gt;ParameterValue&lt;/MeasureName&gt;&lt;UniqueName&gt;[Measures].[ParameterValue]&lt;/UniqueName&gt;&lt;/ID&gt;&lt;ItemCaption&gt;ParameterValue&lt;/ItemCaption&gt;&lt;FormattedValue&gt;true&lt;/FormattedValue&gt;&lt;/Item&gt;&lt;Item&gt;&lt;ID xsi:type="Measure"&gt;&lt;MeasureName&gt;ParameterLevel&lt;/MeasureName&gt;&lt;UniqueName&gt;[Measures].[ParameterLevel]&lt;/UniqueName&gt;&lt;/ID&gt;&lt;ItemCaption&gt;ParameterLevel&lt;/ItemCaption&gt;&lt;FormattedValue&gt;true&lt;/FormattedValue&gt;&lt;/Item&gt;&lt;/Items&gt;&lt;/Select&gt;&lt;From&gt;Internet Sales&lt;/From&gt;&lt;Filter&gt;&lt;FilterItems /&gt;&lt;/Filter&gt;&lt;Calculations /&gt;&lt;Aggregates /&gt;&lt;QueryProperties /&gt;&lt;/QuerySpecification&gt;&lt;Query&gt;&lt;Statement&gt;WITH MEMBER [Measures].[ParameterCaption] AS [Product Category].[Product Category Name].CURRENTMEMBER.MEMBER_CAPTION MEMBER [Measures].[ParameterValue] AS [Product Category].[Product Category Name].CURRENTMEMBER.UNIQUENAME MEMBER [Measures].[ParameterLevel] AS [Product Category].[Product Category Name].CURRENTMEMBER.LEVEL.ORDINAL SELECT {[Measures].[ParameterCaption], [Measures].[ParameterValue], [Measures].[ParameterLevel]} ON COLUMNS , [Product Category].[Product Category Name].ALLMEMBERS ON ROWS FROM [Internet Sales]&lt;/Statement&gt;&lt;ParameterDefinitions /&gt;&lt;/Query&gt;&lt;/QueryDefinition&gt;</rd:DesignerState>
+        <rd:AutoGenerated>true</rd:AutoGenerated>
+        <rd:Hidden>true</rd:Hidden>
+      </Query>
+      <Fields>
+        <Field Name="ParameterCaption">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterCaption]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterValue">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterValue]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterLevel">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[ParameterLevel]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ParameterCaptionIndented">
+          <Value>=Space(3*Fields!ParameterLevel.Value) + Fields!ParameterCaption.Value</Value>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.57292in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.95833in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.38542in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Calendar Year</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Internet Total Sales</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox9">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Internet Total Tax Amt</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox9</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Calendar_Year">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Calendar_Year.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Calendar_Year</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Internet_Total_Sales">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Internet_Total_Sales.FormattedValue</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Internet_Total_Sales</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Internet_Total_Tax_Amt">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Internet_Total_Tax_Amt.FormattedValue</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Internet_Total_Tax_Amt</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSetInternetSales</DataSetName>
+            <Height>0.5in</Height>
+            <Width>5.91667in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>7.71875in</Width>
+      <Page>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="ProductCategoryProductCategoryName">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>[Product Category].[Product Category Name].&amp;[Accessories]</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Product Category Name</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ProductCategoryProductCategoryName</DataSetName>
+          <ValueField>ParameterValue</ValueField>
+          <LabelField>ParameterCaptionIndented</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ProductCategoryProductCategoryName</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>6b2b741e-ae85-4158-9388-2e97079745c2</rd:ReportID>
+</Report>

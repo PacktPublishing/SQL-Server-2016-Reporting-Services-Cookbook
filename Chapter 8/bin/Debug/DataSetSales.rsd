@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSetSales">
+    <Query>
+      <DataSourceReference>DataSourceWideWorldImportersDW</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Year">
+          <DefaultValue>2016</DefaultValue>
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@Month">
+          <DefaultValue>0</DefaultValue>
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT [Calendar Year], [Calendar Month Number], SalesAmount, SalesTarget
+	, CASE WHEN (SalesAmount &gt; 0 AND SalesAmount &gt; SalesTarget) THEN 1
+		WHEN (SalesAmount &gt; 0 AND SalesAmount &gt; ((SalesTarget*90)/100)) THEN 0
+		ELSE -1
+		END Status
+FROM (SELECT [Calendar Year], [Calendar Month Number], SalesAmount
+		, LAG(SalesAmount, 1, 0) OVER (PARTITION BY [Calendar Year] ORDER BY [Calendar Month Number]) 
+		+ ((LAG(SalesAmount, 1, 0) OVER (PARTITION BY [Calendar Year] ORDER BY [Calendar Month Number]) * 5)/100) SalesTarget
+	FROM (SELECT d.[Calendar Year], D.[Calendar Month Number]
+			, Sum(s.Quantity * s.[Unit Price]) SalesAmount
+		FROM Fact.Sale s
+			INNER JOIN Dimension.Date d
+				ON d.Date = s.[Invoice Date Key]
+	
+		GROUP BY d.[Calendar Year], D.[Calendar Month Number]) AS t1
+	) AS t2
+WHERE [Calendar Year] = @Year AND [Calendar Month Number] = CASE WHEN @Month = 0 THEN [Calendar Month Number] ELSE @Month END
+ORDER BY 1, 2</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="Calendar_Year">
+        <DataField>Calendar Year</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="Calendar_Month_Number">
+        <DataField>Calendar Month Number</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="SalesAmount">
+        <DataField>SalesAmount</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="SalesTarget">
+        <DataField>SalesTarget</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Status">
+        <DataField>Status</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>
