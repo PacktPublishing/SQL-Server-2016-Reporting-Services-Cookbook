@@ -6,11 +6,11 @@ All of the code is organized into folders. Each folder starts with a number foll
 
 The code will look like the following:
 
-[default]
-exten => s,1,Dial(Zap/1|30)
-exten => s,2,Voicemail(u100)
-exten => s,102,Voicemail(b100)
-exten => i,1,Voicemail(s0)
+     [default]
+     exten => s,1,Dial(Zap/1|30)
+     exten => s,2,Voicemail(u100)
+     exten => s,102,Voicemail(b100)
+     exten => i,1,Voicemail(s0)
 
 ### Software requirements: 
 To work through the recipes in this book, you will, of course, need a copy of SQL Server 2016. If you don’t have one, Microsoft has now released the SQL Server 2016 Developer Edition as a free download, and it will work just fine for working through the recipes.
