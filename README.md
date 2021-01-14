@@ -1,8 +1,3 @@
-## $5 Tech Unlocked 2021!
-[Buy and download this Book for only $5 on PacktPub.com](https://www.packtpub.com/product/sql-server-2016-reporting-services-cookbook/9781786461810)
------
-*If you have read this book, please leave a review on [Amazon.com](https://www.amazon.com/gp/product/1786461811).     Potential readers can then use your unbiased opinion to help them make purchase decisions. Thank you. The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
-
 # SQL Server 2016 Reporting Services Cookbook
 This is the code repository for [SQL Server 2016 Reporting Services Cookbook](https://www.packtpub.com/big-data-and-business-intelligence/sql-server-2016-reporting-services-cookbook?utm_source=github&utm_medium=repository&utm_content=9781786461810), published by Packt. It contains all the supporting project files necessary to work through the book from start to finish.
 ##Instructions and Navigations
